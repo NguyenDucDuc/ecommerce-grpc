@@ -12,6 +12,9 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, LoginDto } from '@app/common/dtos/index';
 import { JwtAuthGuard } from '@app/common/guards';
 import { IRequestWithUser } from '@app/common/interfaces';
+import { RolesGuard } from '@app/common/guards/role.guard';
+import { Roles } from '@app/common/decorators';
+import { ERoles } from '@app/common/enums/role.enum';
 
 @ApiTags('user')
 @Controller('user-service/user')
