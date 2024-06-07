@@ -4,6 +4,8 @@ package user;
 
 service UserService {
   rpc CreateUser (CreateUserDto) returns (User) {}
+  rpc LoginUser (LoginUserDto) returns (LoginUserResponse) {}
+  rpc CreateAdmin (CreateUserDto) returns (User) {}
 }
 
 message User {
@@ -18,10 +20,19 @@ message User {
   string updatedAt = 9;
 }
 
+message LoginUserResponse {
+  string accessToken = 1;
+}
+
 message CreateUserDto {
   string username = 1;
   string password = 2;
   string firstName = 3;
   string lastName = 4;
   string phone = 5;
+}
+
+message LoginUserDto {
+  string username = 1;
+  string password = 2;
 }

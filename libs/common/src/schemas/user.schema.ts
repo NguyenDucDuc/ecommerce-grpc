@@ -12,7 +12,7 @@ export class User {
   username: string;
 
   @Prop({ type: mongoose.Schema.Types.String })
-  password: number;
+  password: string;
 
   @Prop({ type: mongoose.Schema.Types.String })
   firstName: string;

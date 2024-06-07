@@ -1,11 +1,11 @@
-import { CreateUserDto } from '@app/common/dtos';
+import { CreateUserDto, LoginDto } from '@app/common/dtos';
 import {
   UserPackageName,
   UserServiceClient,
   UserServiceName,
 } from '@app/common/types';
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ClientGrpc } from '@nestjs/microservices';
+import { ClientGrpc, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -18,6 +18,26 @@ export class UserService implements OnModuleInit {
   }
 
   createUser(body: CreateUserDto) {
-    return firstValueFrom(this.userServiceClient.createUser(body));
+    try {
+      return firstValueFrom(this.userServiceClient.createUser(body));
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
+  }
+
+  login(body: LoginDto) {
+    try {
+      return firstValueFrom(this.userServiceClient.loginUser(body));
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
+  }
+
+  createAdmin(payload: CreateUserDto) {
+    try {
+      return firstValueFrom(this.userServiceClient.createAdmin(payload));
+    } catch (error) {
+      throw new RpcException(error.message);
+    }
   }
 }

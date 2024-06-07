@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { GrpcModule } from '@app/common/services/grpc/grpc.module';
 import { UserPackageName } from '@app/common/types';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from '@app/common/strategies';
 
 @Module({
   imports: [
@@ -11,8 +13,9 @@ import { UserPackageName } from '@app/common/types';
       path: 'gateway-service/user.proto',
       url: process.env.GRPC_USER,
     }),
+    PassportModule,
   ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, JwtStrategy],
 })
 export class UserModule {}
