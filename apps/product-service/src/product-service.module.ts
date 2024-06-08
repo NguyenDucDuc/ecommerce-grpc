@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ProductServiceController } from './product-service.controller';
-import { ProductServiceService } from './product-service.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [],
-  controllers: [ProductServiceController],
-  providers: [ProductServiceService],
+  imports: [ConfigModule.forRoot({ envFilePath: '.env' })],
+  controllers: [],
+  providers: [],
 })
 export class ProductServiceModule {}
